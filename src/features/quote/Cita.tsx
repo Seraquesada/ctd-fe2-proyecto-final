@@ -11,6 +11,7 @@ import {
 import { obtenerMensaje } from "./utils";
 
 function Cita() {
+  
   const [valorInput, setValorInput] = useState("");
   const { cita = "", personaje = "" } =
     useAppSelector(obtenerCitaDelEstado, shallowEqual) || {};
