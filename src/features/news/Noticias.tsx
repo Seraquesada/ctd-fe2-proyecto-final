@@ -20,6 +20,7 @@ import {
   BotonSuscribir,
   CotenedorTexto,
 } from "./styled";
+import { formatearNoticias } from "./hooks";
 
 export interface INoticiasNormalizadas {
   id: number;
@@ -36,38 +37,23 @@ const Noticias = () => {
   const [modal, setModal] = useState<INoticiasNormalizadas | null>(null);
 
   useEffect(() => {
-    const obtenerInformacion = async () => {
-      const respuesta = await obtenerNoticias();
-
-      const data = respuesta.map((n) => {
-        const titulo = n.titulo
-          .split(" ")
-          .map((str) => {
-            return str.charAt(0).toUpperCase() + str.slice(1);
-          })
-          .join(" ");
-
-        const ahora = new Date();
-        const minutosTranscurridos = Math.floor(
-          (ahora.getTime() - n.fecha.getTime()) / 60000
-        );
-
-        return {
-          id: n.id,
-          titulo,
-          descripcion: n.descripcion,
-          fecha: `Hace ${minutosTranscurridos} minutos`,
-          esPremium: n.esPremium,
-          imagen: n.imagen,
-          descripcionCorta: n.descripcion.substring(0, 100),
-        };
-      });
-
-      setNoticias(data);
+      const obtenerInformacion = async () => {
+        const respuesta = await obtenerNoticias();
+        const data = formatearNoticias(respuesta);
+        setNoticias(data);
     };
+  obtenerInformacion();
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[]);
 
-    obtenerInformacion();
-  }, []);
+/*
+    El hook useEffect tenia múltiples responsabilidades, como obtener las noticias, 
+    formatear los datos y actualizar el estado. 
+    Para aplicar el Principio de Responsabilidad Única, a las cuales podemos dividir en funciones separadas, 
+    para asi cumplir con este principio.
+    Las cuales decide separaras las en otro archivo llamado "hooks" para genenar una mejor lectura de codigo.
+*/ 
+
 
   return (
     <ContenedorNoticias>
