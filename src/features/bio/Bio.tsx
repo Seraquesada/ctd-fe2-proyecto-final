@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { NombresSimpsons, INFO_SIMPSONS } from "./constants";
-import styled from "styled-components";
+import {
+    BioContainer,
+    ContenedorBotones,
+    BioImagen,
+    BioNombre,
+    BioDescripcion,
+    BotonBioActivo,
+    BotonBioInactivo
+} from "./styled";
 
 const Bio = () => {
   const [bioActiva, setBioActiva] = useState(
@@ -10,85 +18,26 @@ const Bio = () => {
   const onClick: (nombre: NombresSimpsons) => void = (nombre) =>
     setBioActiva(INFO_SIMPSONS[nombre]);
 
-  const crearBotones = () => {
+  const crearBotones = ()  => {
     return Object.keys(INFO_SIMPSONS).map((nombre: string) => (
-      <button
-        key={nombre as string}
-        onClick={() => onClick(nombre as NombresSimpsons)}
-        className={
-          bioActiva.id === nombre
-            ? BotonBioActivo
-            : BotonBioInactivo
-        }
-      >
-        {nombre}
-      </button>
+      bioActiva.id === nombre?
+          <BotonBioActivo
+            key={nombre as string}
+            onClick={() => onClick(nombre as NombresSimpsons)}
+          >
+            {nombre}
+          </BotonBioActivo>
+          :
+          <BotonBioInactivo
+            key={nombre as string}
+            onClick={() => onClick(nombre as NombresSimpsons)}
+          >
+            {nombre}
+          </BotonBioInactivo>
     ));
   };
 
-  const BioContainer = styled.div`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      width: 100%;
-      height: 100%;
-  `;
   
-  const BioImagen = styled.p`
-      max-width: 200px;
-      max-height: 300px;
-      margin-bottom: 1rem;
-  `;
-
-  const BioNombre = styled.h3`
-      font-size: 2em;
-      margin-bottom: 1rem;
-  `;
-
-  const BioDescripcion = styled.p`
-      font-size: 1.3em;
-      width: 70%;
-      margin: 1rem auto;
-  `;
-
-  const ContenedorBotones = styled.div`
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      margin-bottom: 1rem;
-  `;
-
-  const BotonBioActivo = styled.button`
-      border-radius: 5px;
-      border: 1px solid darkgray;
-      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-      padding: 1rem;
-      margin: 1rem;
-      font-family: "Homer Simpson Revised", sans-serif;
-      font-size: 1.4rem;
-      background-color: #fdd835;
-      color: whitesmoke;
-      text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000,
-        -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000,
-        -2px 0px 0 #000000, 0px -2px 0 #000000;
-      
-        &hover{cursor: pointer;}
-  `;
-
-  const BotonBioInactivo = styled.button`
-      border-radius: 5px;
-      border: 1px solid darkgray;
-      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-      padding: 1rem;
-      margin: 1rem;
-      font-family: "Homer Simpson Revised", sans-serif;
-      font-size: 1.4rem;
-
-      &hover{cursor: pointer;}
-  `;
 
 
   return (
