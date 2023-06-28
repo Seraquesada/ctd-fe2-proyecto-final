@@ -30,16 +30,16 @@ afterEach(() => server.resetHandlers());
 
 afterAll(() => server.close());
 
-  describe("Cita component", () => {
+  describe.skip("Cita component", () => {
 
       //Works
       describe("testing buttons",()=>{
-        it.skip("should render Obtener cita aleatoria when input is empty", async ()=>{
+        it("should render Obtener cita aleatoria when input is empty", async ()=>{
           render(<Cita/>)
           expect(screen.getByRole("button",{name:/Obtener cita aleatoria/i})).toBeInTheDocument();
         })
 
-        it.skip("should render Obtener Cita when input has value", async ()=>{
+        it("should render Obtener Cita when input has value", async ()=>{
           render(<Cita/>)
           const input = screen.getByRole('textbox', { name: /author cita/i });
           fireEvent.change(input, { target: { value: /Homer Simpson/i } });
@@ -51,7 +51,7 @@ afterAll(() => server.close());
 
         })
 
-        it.skip("should clean input when button borrar is called", async() => {
+        it("should clean input when button borrar is called", async() => {
           render(<Cita/>)
           const onClickBorrar = jest.fn();
           const input = screen.getByRole('textbox', {name: /author cita/i});
@@ -72,7 +72,7 @@ afterAll(() => server.close());
       });
       //Works
       describe("when executing the search", () =>{
-        it.skip("Should render Cargando", async() => {
+        it("Should render Cargando", async() => {
           render(<Cita/>)
 
           const buttonSearch = await screen.findByRole("button",{name:/Obtener cita aleatoria/i});
@@ -84,7 +84,7 @@ afterAll(() => server.close());
       });
       //Works
       describe("When the query is successful", () => {
-        test.skip("Should give a random character when input is empty", async () => {
+        test("Should give a random character when input is empty", async () => {
           render(<Cita/>)
           const onClickObtenerCita = jest.fn();
           const input = screen.getByRole('textbox', {name: /Author Cita/i});
@@ -106,7 +106,7 @@ afterAll(() => server.close());
           
           });
 
-        test.skip("Should retun the name of the search", async () => {
+        test("Should retun the name of the search", async () => {
           render(<Cita/>);
           const onClickObtenerCita = jest.fn();
           const input = screen.getByRole('textbox', {name: /Author Cita/i});
@@ -128,7 +128,7 @@ afterAll(() => server.close());
 
           });
 
-        test.skip("Should retun the correct quote", async () => {
+        test("Should retun the correct quote", async () => {
             render(<Cita/>)
             const onClickObtenerCita = jest.fn();
             const input = screen.getByRole('textbox', {name: /Author Cita/i});
@@ -153,7 +153,7 @@ afterAll(() => server.close());
       });
       //Works
       describe("When the query is wrongly called", () =>{
-        it.skip("Should retun Por favor ingrese un nombre válido when it is called with a number", async ()=>{
+        it("Should retun Por favor ingrese un nombre válido when it is called with a number", async ()=>{
               render(<Cita/>)
 
               const input = screen.getByRole('textbox', {name: /author cita/i});
@@ -167,7 +167,7 @@ afterAll(() => server.close());
               
           });
 
-        it.skip("Should retun No se encontro ninguna cita when it is called with name that does not exist", async ()=>{
+        it("Should retun No se encontro ninguna cita when it is called with name that does not exist", async ()=>{
               render(<Cita/>)
 
               const input = screen.getByRole('textbox', {name: /author cita/i});

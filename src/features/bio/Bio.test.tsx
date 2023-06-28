@@ -1,31 +1,50 @@
-import { rest } from "msw";
-import { setupServer } from "msw/node";
-import { API_URL } from "../../app/constants";
-import { screen } from "@testing-library/react";
+import { screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import { render } from "../../test-utils"
 import Bio from "./Bio";
-export const handlers = [
-    rest.get(API_URL, (req, res, ctx) => {
-    }),
-];
+import userEvent from "@testing-library/user-event";
 
-const server = setupServer(...handlers);
-// Establish API mocking before all tests.
-beforeAll(() => server.listen())
+
+beforeAll(() => {})
 
 // Reset any request handlers that we may add during the tests,
 // so they don't affect other tests.
-afterEach(() => server.resetHandlers())
+afterEach(() => {})
 
 // Clean up after the tests are finished.
-afterAll(() => server.close())
+afterAll(() => {})
 
-describe("Bio", () => {
-    test.skip("Should render five buttons",async()=>{
+describe.skip("Bio", () => {
+    //works
+    test("Should render five buttons",async ()=>{
         render(<Bio/>)
-
         const buttons = screen.getAllByRole('button');
         expect(buttons.length).toBe(5);
+        
+    });
+    //works
+    test("Should render character Bart Simpson by default", ()=>{
+        render(<Bio/>)
+        const characterSearch =  screen.getByText("Bart Simpson");
+        expect(characterSearch).toBeInTheDocument();
+        expect(characterSearch).toHaveTextContent("Bart Simpson");
+        expect(characterSearch).not.toHaveTextContent("Marge Simpson");
+    });
+    //works
+    test("Should render the correct character", async ()=>{
+        render(<Bio/>)
+        const onClick = jest.fn();
+
+        const button = screen.getByRole('button',{name : "MARGE"});
+        button.onclick = onClick;
+        userEvent.click(button);
+
+
+        await waitFor(()=>expect(onClick).toHaveBeenCalled());
+
+        const characterSearch = await screen.findByText("Marge Simpson");
+        expect(characterSearch).toBeInTheDocument();
+        expect(characterSearch).toHaveTextContent("Marge Simpson");
+        expect(characterSearch).not.toHaveTextContent("Bart Simpson");
 
     })
 })
