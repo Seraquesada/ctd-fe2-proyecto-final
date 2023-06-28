@@ -37,9 +37,6 @@ const Bio = () => {
     ));
   };
 
-  
-
-
   return (
     <BioContainer>
       <ContenedorBotones>{crearBotones()}</ContenedorBotones>

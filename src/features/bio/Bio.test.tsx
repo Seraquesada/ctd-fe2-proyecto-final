@@ -1,7 +1,9 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { API_URL } from "../../app/constants";
-
+import { screen } from "@testing-library/react";
+import { render } from "../../test-utils"
+import Bio from "./Bio";
 export const handlers = [
     rest.get(API_URL, (req, res, ctx) => {
     }),
@@ -19,5 +21,11 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe("Bio", () => {
-    test.skip("tests should",()=>{})
+    test.skip("Should render five buttons",async()=>{
+        render(<Bio/>)
+
+        const buttons = screen.getAllByRole('button');
+        expect(buttons.length).toBe(5);
+
+    })
 })

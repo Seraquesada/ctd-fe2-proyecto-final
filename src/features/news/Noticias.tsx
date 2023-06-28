@@ -42,16 +42,15 @@ const Noticias = () => {
         const data = formatearNoticias(respuesta);
         setNoticias(data);
     };
-  obtenerInformacion();
+      obtenerInformacion();
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[]);
 
 /*
     El hook useEffect tenia múltiples responsabilidades, como obtener las noticias, 
     formatear los datos y actualizar el estado. 
-    Para aplicar el Principio de Responsabilidad Única, a las cuales podemos dividir en funciones separadas, 
-    para asi cumplir con este principio.
-    Las cuales decide separaras las en otro archivo llamado "hooks" para genenar una mejor lectura de codigo.
+    Para aplicar el Principio de Responsabilidad Única, las dividi en funciones separadas cumpliendo el principio,
+    adecide separaras las en otro archivo llamado "hooks" para genenar una mejor lectura del codigo.
 */ 
 
 
@@ -60,7 +59,7 @@ const Noticias = () => {
       <TituloNoticias>Noticias de los Simpsons</TituloNoticias>
       <ListaNoticias>
         {noticias.map((n) => (
-          <TarjetaNoticia>
+          <TarjetaNoticia key={n.id}>
             <ImagenTarjetaNoticia src={n.imagen} />
             <TituloTarjetaNoticia>{n.titulo}</TituloTarjetaNoticia>
             <FechaTarjetaNoticia>{n.fecha}</FechaTarjetaNoticia>
