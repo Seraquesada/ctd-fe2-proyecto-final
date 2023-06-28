@@ -10,7 +10,7 @@ import userEvent from "@testing-library/user-event";
 export const handlers = [
     rest.get(API_URL, (req, res, ctx) => {
     }),
-  ];
+];
 
 const server = setupServer(...handlers);
 // Establish API mocking before all tests.
