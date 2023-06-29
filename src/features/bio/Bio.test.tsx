@@ -1,4 +1,4 @@
-import { screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { render } from "../../test-utils"
 import Bio from "./Bio";
 import userEvent from "@testing-library/user-event";

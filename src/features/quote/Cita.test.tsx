@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import {  fireEvent, prettyDOM, screen, waitFor,} from "@testing-library/react";
+import {  fireEvent, screen, waitFor,} from "@testing-library/react";
 import {  render  } from "../../test-utils"
 import { API_URL } from "../../app/constants";
 
