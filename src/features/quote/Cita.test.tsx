@@ -30,7 +30,7 @@ afterEach(() => server.resetHandlers());
 
 afterAll(() => server.close());
 
-  describe.skip("Cita component", () => {
+  describe("Cita component", () => {
 
       //Works
       describe("testing buttons",()=>{

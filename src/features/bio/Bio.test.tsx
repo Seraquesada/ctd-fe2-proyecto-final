@@ -15,14 +15,14 @@ afterAll(() => {})
 
 describe("Bio", () => {
     //works
-    test.skip("Should render five buttons",async ()=>{
+    test("Should render five buttons",async ()=>{
         render(<Bio/>)
         const buttons = screen.getAllByRole('button');
         expect(buttons.length).toBe(5);
         
     });
     //works
-    test.skip("Should render character Bart Simpson by default", ()=>{
+    test("Should render character Bart Simpson by default", ()=>{
         render(<Bio/>)
         const characterSearch = screen.getByText("Bart Simpson");
         expect(characterSearch).toBeInTheDocument();
