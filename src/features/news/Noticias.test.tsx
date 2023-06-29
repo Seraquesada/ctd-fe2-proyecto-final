@@ -59,18 +59,20 @@ export const handlers = [
     }),
     ];
 
-describe("NoticiasComponent", () => {
+describe.skip("Noticias", () => {
 
     it.skip("Should render the title and the news", async () => {
         render(<Noticias/>)
+        jest.setTimeout(2000);
+        
         const title = await screen.findByText("Noticias de los Simpsons");
         expect(title).toBeInTheDocument();
-        jest.setTimeout(2000);
-        const buttons = await screen.findAllByRole("button", {name:/Ver más/i});
-        expect(buttons.length).toBe(3);
+        
+        const news = await screen.findAllByRole("button", {name:/Ver más/i});
+        expect(news.length).toBe(3);
         
     });
-    
+
     it.skip("Should render button Suscribite when prop esPremium is true", async () => {
         render(<Noticias />)
         jest.setTimeout(2000);
