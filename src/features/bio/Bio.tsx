@@ -6,8 +6,7 @@ import {
     BioImagen,
     BioNombre,
     BioDescripcion,
-    BotonBioActivo,
-    BotonBioInactivo
+    BioButton
 } from "./styled";
 
 const Bio = () => {
@@ -18,24 +17,19 @@ const Bio = () => {
   const onClick: (nombre: NombresSimpsons) => void = (nombre) =>
     setBioActiva(INFO_SIMPSONS[nombre]);
 
-  const crearBotones = ()  => {
-    return Object.keys(INFO_SIMPSONS).map((nombre: string) => (
-      bioActiva.id === nombre?
-          <BotonBioActivo
-            key={nombre as string}
-            onClick={() => onClick(nombre as NombresSimpsons)}
-          >
-            {nombre}
-          </BotonBioActivo>
-          :
-          <BotonBioInactivo
-            key={nombre as string}
-            onClick={() => onClick(nombre as NombresSimpsons)}
-          >
-            {nombre}
-          </BotonBioInactivo>
-    ));
-  };
+    const crearBotones = () => {
+      return Object.keys(INFO_SIMPSONS).map((nombre: string) => (
+        <BioButton
+          key={nombre as string}
+          onClick={() => onClick(nombre as NombresSimpsons)}
+          nameActive={
+            bioActiva.id === nombre
+          }
+        >
+          {nombre}
+        </BioButton>
+      ));
+    };
 
   return (
     <BioContainer>

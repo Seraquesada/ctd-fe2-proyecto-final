@@ -1,4 +1,4 @@
-import { screen, waitFor } from "@testing-library/react";
+import { screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import { render } from "../../test-utils"
 import Bio from "./Bio";
 import userEvent from "@testing-library/user-event";
@@ -14,6 +14,10 @@ afterEach(() => {})
 afterAll(() => {})
 
 describe("Bio", () => {
+    const onClick = jest.fn();
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
     //works
     test("Should render five buttons",async ()=>{
         render(<Bio/>)
@@ -33,9 +37,10 @@ describe("Bio", () => {
     //works
     test("Should render the correct character and change the style of the button", async ()=>{
         render(<Bio/>)
-        const onClick = jest.fn();
+        
 
-        const button = screen.getByRole('button',{name : "MARGE"});
+        const button = await screen.findByRole('button',{name : "MARGE"});
+        
         button.onclick = onClick;
         userEvent.click(button);
         
@@ -45,6 +50,8 @@ describe("Bio", () => {
         expect(characterSearch).toBeInTheDocument();
         expect(characterSearch).toHaveTextContent("Marge Simpson");
         expect(characterSearch).not.toHaveTextContent("Bart Simpson");
-        expect(button).toHaveClass("sc-gsFSXq eACdmA");
+        await waitFor(()=>{
+            expect(button.className).toBe("sc-iGgWBj fRoafO");
+        })
     })
 })

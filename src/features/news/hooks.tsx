@@ -1,4 +1,4 @@
-import { INoticiasNormalizadas } from "./Noticias";
+import { INoticiasNormalizadas } from "./types";
 import { INoticias } from "./fakeRest";
 
 export const formatearNoticias = (noticias : INoticias[]) : INoticiasNormalizadas[]  => {
@@ -26,8 +26,6 @@ const useCapitalizarPalabras = (str : String) => {
 
 const useCalcularMinutos = (fecha : Date) : number => {
     const ahora = new Date();
-    const minutosTranscurridos = Math.floor(
-        (ahora.getTime() - fecha.getTime()) / 60000
-    );
+    const minutosTranscurridos = Math.floor((ahora.getTime() - fecha.getTime()) / 60000);
     return minutosTranscurridos;
 };
